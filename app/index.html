@@ -4,9 +4,8 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=1920">
   <title>Home</title>
-  <link rel="stylesheet" href="style.css">
 </head>
-<body class="layout-spotlight">
+<body class="layout-spotlight" style="background:#000;color:#fff">
   <div id="bg"></div>
   <div id="shade"></div>
 
@@ -47,7 +46,41 @@
 
   <div id="toast"></div>
 
-  <script src="config.js"></script>
-  <script src="app.js"></script>
+  <!-- Lader: TizenBrew hält diese Datei fest (Modulname mit Versionsnummer).
+       style.css, config.js und app.js kommen immer vom neuesten Commit auf main,
+       über jsDelivr mit Commit-Kennung – das umgeht den Zwischenspeicher.
+       Klappt die GitHub-Abfrage nicht, werden die Dateien aus dem festen Modulstand geladen. -->
+  <script>
+  (function () {
+    var REPO = 'christianhoerwey-hub/tv-home';
+
+    function addScript(src, done) {
+      var s = document.createElement('script');
+      s.src = src;
+      s.onload = done || null;
+      document.body.appendChild(s);
+    }
+
+    function load(base) {
+      var css = document.createElement('link');
+      css.rel = 'stylesheet';
+      css.href = base + 'style.css';
+      document.head.appendChild(css);
+      addScript(base + 'config.js', function () { addScript(base + 'app.js'); });
+    }
+
+    var x = new XMLHttpRequest();
+    x.open('GET', 'https://api.github.com/repos/' + REPO + '/commits/main');
+    x.setRequestHeader('Accept', 'application/vnd.github.sha');
+    x.timeout = 4000;
+    x.onload = function () {
+      var sha = (x.responseText || '').trim();
+      if (x.status === 200 && /^[0-9a-f]{40}$/.test(sha)) load('https://cdn.jsdelivr.net/gh/' + REPO + '@' + sha + '/app/');
+      else load('');
+    };
+    x.onerror = x.ontimeout = function () { load(''); };
+    x.send();
+  })();
+  </script>
 </body>
 </html>
