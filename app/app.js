@@ -39,8 +39,18 @@
       var t = document.createElement('div');
       t.className = 'tile' + (i === focus ? ' focus' : '');
       t.style.background = app.color;
-      t.innerHTML = '<div class="face"><span class="mono"></span></div><div class="label"></div>';
-      t.querySelector('.mono').textContent = app.short;
+      var path = (window.HOME_ICONS || {})[app.icon];
+      t.innerHTML = '<div class="face"></div><div class="label"></div>';
+      if (path) {
+        t.querySelector('.face').innerHTML =
+          '<svg class="logo' + (app.wide ? ' wide' : '') + '" viewBox="0 0 24 24"><path fill-rule="evenodd" fill="#fff" d="' + path + '"/></svg>';
+      } else {
+        // Ohne Logo: Anfangsbuchstabe
+        var m = document.createElement('span');
+        m.className = 'mono';
+        m.textContent = app.name.charAt(0);
+        t.querySelector('.face').appendChild(m);
+      }
       t.querySelector('.label').textContent = app.name;
       t.addEventListener('click', function () { focus = i; updateFocus(); launch(app); });
       box.appendChild(t);
