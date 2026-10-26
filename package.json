@@ -1,6 +1,6 @@
 {
   "name": "tv-home",
-  "version": "1.1.0",
+  "version": "1.1.1",
   "description": "Eigener, werbefreier Homescreen für den Samsung TV (TizenBrew-Modul)",
   "packageType": "app",
   "appName": "Home",

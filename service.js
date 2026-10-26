@@ -25,5 +25,6 @@ var server = http.createServer(function (req, res) {
 });
 
 // Läuft der Dienst schon (Modul erneut gestartet), ist der Port belegt – dann einfach still bleiben.
+// Lauscht im Heimnetz statt nur lokal, damit man vom Laptop prüfen kann, ob er läuft.
 server.on('error', function () {});
-server.listen(8095, '127.0.0.1');
+server.listen(8095, '0.0.0.0');
