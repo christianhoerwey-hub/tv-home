@@ -85,25 +85,26 @@
   }
 
   // ---------- Apps starten ----------
+  // Die Seite läuft bei TizenBrew als Webseite ohne tizen-API.
+  // Apps startet deshalb der Hintergrunddienst des Moduls (service.js).
+  var SERVICE = 'http://127.0.0.1:8095';
+
   function launch(app) {
     if (app.id === 'tv') {
-      // Homescreen schließen -> TV zeigt wieder die letzte Quelle
-      try { tizen.application.getCurrentApplication().exit(); return; } catch (e) { toast('Nur am TV verfügbar'); return; }
+      toast('Zum Fernsehen: Zurück-Taste gedrückt halten');
+      return;
     }
     toast('Starte ' + app.name + ' …');
-    try {
-      tizen.application.launch(app.id, null, function () { restLaunch(app); });
-    } catch (e) {
-      restLaunch(app);
-    }
+    fetch(SERVICE + '/launch?id=' + encodeURIComponent(app.id))
+      .then(function (r) { return r.json(); })
+      .then(function (j) { if (!j.ok) toast(app.name + ': ' + j.error); })
+      .catch(function () { toast('Dienst nicht erreichbar – TizenBrew neu starten'); });
   }
 
-  // Fallback über die lokale TV-Schnittstelle (dieselbe, die Home Assistant nutzt)
-  function restLaunch(app) {
-    try {
-      fetch('http://127.0.0.1:8001/api/v2/applications/' + app.id, { method: 'POST', mode: 'no-cors' })
-        .catch(function () { toast(app.name + ' ließ sich nicht starten'); });
-    } catch (e) { toast(app.name + ' ließ sich nicht starten'); }
+  // Gelbe Taste: zurück ins TizenBrew-Menü (z.B. für Autolaunch-Einstellungen)
+  function backToTizenBrew() {
+    if (history.length > 1) history.back();
+    else toast('TizenBrew neu öffnen, um ins Menü zu kommen');
   }
 
   // ---------- Einstellungs-Panel ----------
@@ -169,6 +170,7 @@
     else if (code === K.RED) { cycleLayout(); return; }
     else if (code === K.GREEN) { state.bg = (state.bg + 1) % CFG.backgrounds.length; applyBackground(); save(); toast(CFG.backgrounds[state.bg].name); return; }
     else if (code === K.BLUE) { openSettings(true); return; }
+    else if (code === K.YELLOW) { backToTizenBrew(); return; }
     else return;
     updateFocus();
   }

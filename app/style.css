@@ -74,7 +74,7 @@ body.layout-minimal.no-clock #clockbox { display: none; }
 #legend { position: fixed; right: 4vw; bottom: 3.5vh; font-size: 0.9vw; opacity: 0.6; }
 #legend span { margin-left: 1.6vw; }
 .k { display: inline-block; width: 0.8vw; height: 0.8vw; border-radius: 0.2vw; margin-right: 0.4vw; vertical-align: -0.05vw; }
-.k.red { background: #e53935; } .k.green { background: #43a047; } .k.blue { background: #1e88e5; }
+.k.red { background: #e53935; } .k.green { background: #43a047; } .k.yellow { background: #fdd835; } .k.blue { background: #1e88e5; }
 
 /* Einstellungen */
 #settings { position: fixed; top: 0; left: 0; right: 0; bottom: 0; background: rgba(0,0,0,0.6); display: flex; align-items: center; justify-content: center; }

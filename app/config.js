@@ -1,6 +1,6 @@
 // Kacheln auf dem Homescreen. Reihenfolge = Reihenfolge am TV.
-// id: Tizen-App-ID (am TV geprüft am 2026-10-26). Sonderfall "tv": beendet den Homescreen,
-// der TV fällt dann auf die letzte Quelle (Live-TV/HDMI) zurück.
+// id: Tizen-App-ID (am TV geprüft am 2026-10-26). Sonderfall "tv": zeigt nur einen Hinweis,
+// weil ein Modul TizenBrew nicht selbst beenden kann (Zurück lang drücken = Fernsehen).
 window.HOME_CONFIG = {
   name: 'Home',
   apps: [
