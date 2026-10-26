@@ -1,0 +1,52 @@
+<!doctype html>
+<html lang="de">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=1920">
+  <title>Home</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body class="layout-spotlight">
+  <div id="bg"></div>
+  <div id="shade"></div>
+
+  <header id="top">
+    <div id="greeting"></div>
+    <div id="clockbox">
+      <div id="clock">--:--</div>
+      <div id="date"></div>
+    </div>
+  </header>
+
+  <section id="spot">
+    <div id="spot-name"></div>
+    <div id="spot-hint">OK zum Starten</div>
+  </section>
+
+  <main id="tiles"></main>
+
+  <footer id="legend">
+    <span><i class="k red"></i>Layout</span>
+    <span><i class="k green"></i>Hintergrund</span>
+    <span><i class="k blue"></i>Einstellungen</span>
+  </footer>
+
+  <div id="settings" class="hidden">
+    <div class="panel">
+      <h2>Einstellungen</h2>
+      <div class="row-title">Layout</div>
+      <div class="row" id="row-layout"></div>
+      <div class="row-title">Hintergrund</div>
+      <div class="row" id="row-bg"></div>
+      <div class="row-title">Uhr</div>
+      <div class="row" id="row-clock"></div>
+      <p class="note">Zurück-Taste schließt</p>
+    </div>
+  </div>
+
+  <div id="toast"></div>
+
+  <script src="config.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>
