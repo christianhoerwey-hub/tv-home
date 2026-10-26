@@ -8,6 +8,8 @@ window.HOME_CONFIG = {
     { id: 'tv',            name: 'Fernsehen',   icon: 'tv',         color: '#3a7bd5' },
     { id: '3201907018807', name: 'Netflix',     icon: 'netflix',    color: '#e50914' },
     { id: '111299001912',  name: 'YouTube',     icon: 'youtube',    color: '#ff0033' },
+    // Keine eigene YT-Music-App am TV: öffnet die YouTube-App
+    { id: '111299001912',  name: 'YT Music',    icon: 'youtubemusic', color: '#212121' },
     { id: '3201910019365', name: 'Prime Video', icon: 'primevideo', color: '#00a8e1', wide: true },
     { id: '3201512006963', name: 'Plex',        icon: 'plex',       color: '#1f1f1f', wide: true }
   ],
